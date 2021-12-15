@@ -21,7 +21,7 @@ def get_friends_no_cache(user_id):
             values={'user_id': user_id},
         )
     except vk_api.ApiError as ex:
-        return [] if ex.code in CANT_GET_FRIENDS else None
+        return [] if ex.code in CANT_GET_FRIENDS_ERROR_CODES else None
     except Exception:
         return None
 
