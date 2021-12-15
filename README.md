@@ -8,3 +8,13 @@ Fetch social graph
 4. Кэширование отключается опцией `--ignore-cache`  
 5. Получение друзей пользователя реализуется через API VK.  
 6. Для работы скрипта необходим ключ VK, если очень нужно — могу его прислать  
+
+
+## Examples
+
+`poetry run vk-parser dist 5 707 -d 4`
+Shortest path have 3 edges:
+5 -> 142582 -> 131588 -> 707
+
+`work@Arturs-MacBook-Pro last_one % poetry run vk-parser fetch 239932`
+2010 users by dist <= 2
