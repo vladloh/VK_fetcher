@@ -4,7 +4,7 @@ import os
 
 import vk_api
 
-from vk_parser.config import CANT_GET_FRIENDS, DIR_FRIENDS, VK_TOKEN
+from vk_parser.config import CANT_GET_FRIENDS_ERROR_CODES, DIR_FRIENDS, VK_TOKEN
 
 
 def create_dir_if_not_exists(directory):
