@@ -12,9 +12,9 @@ Fetch social graph
 
 ## Examples
 
-`poetry run vk-parser dist 5 707 -d 4`
+`poetry run vk-parser dist 5 707 -d 4`  
 Shortest path have 3 edges:
 5 -> 142582 -> 131588 -> 707
 
-`work@Arturs-MacBook-Pro last_one % poetry run vk-parser fetch 239932`
+`work@Arturs-MacBook-Pro last_one % poetry run vk-parser fetch 239932`  
 2010 users by dist <= 2
