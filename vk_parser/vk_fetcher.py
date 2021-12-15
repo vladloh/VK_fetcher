@@ -4,29 +4,28 @@ import os
 
 import vk_api
 
-from vk_parser.config import DIR_FRIENDS, PRIVATE_PROFILE, VK_TOKEN
+from vk_parser.config import CANT_GET_FRIENDS, DIR_FRIENDS, VK_TOKEN
 
 
 def create_dir_if_not_exists(directory):
     """Create directory if not exists."""
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    os.makedirs(directory, exist_ok=True)
 
 
 def get_friends_no_cache(user_id):
     """Fetch friends with VK API."""
     vk_session = vk_api.VkApi(token=VK_TOKEN)
     try:
-        res = vk_session.method(
+        response = vk_session.method(
             method='friends.get',
             values={'user_id': user_id},
         )
     except vk_api.ApiError as ex:
-        return [] if ex.code == PRIVATE_PROFILE else None
+        return [] if ex.code in CANT_GET_FRIENDS else None
     except Exception:
         return None
 
-    return res['items'] if 'items' in res else None
+    return response['items'] if 'items' in response else None
 
 
 def load_friends(user_id):
