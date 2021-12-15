@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "vk_parser"
+version = "0.1.0"
+description = "Parse different data from vk"
+authors = ["Artur Saakyan"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+vk-api = "^11.9.7"
+
+[tool.poetry.dev-dependencies]
+wemake-python-styleguide = "^0.16.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+vk-parser = "vk_parser.main:main"
