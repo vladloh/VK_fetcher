@@ -35,7 +35,7 @@ def initialize_parser():
 
 
 def show_progress(user_id, remain_users):
-    sys.stdout.write(f'\rParsing user with id = {user_id}, remains {remain_users}. ')
+    sys.stdout.write(f'\rGetting friends for user with id = {user_id}, remains {remain_users}. ')
     sys.stdout.flush()
 
 

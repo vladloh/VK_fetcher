@@ -16,7 +16,6 @@ config.read(TOKEN_PATH)
 
 try:
     VK_TOKEN = config['VK_API']['VK_TOKEN']
-    print(VK_TOKEN)
 except Exception:
     print('No VK_TOKEN found. Please add VK_TOKEN to VK_API section in setup.cfg')
     VK_TOKEN = None
