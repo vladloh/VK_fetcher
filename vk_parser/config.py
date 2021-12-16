@@ -16,7 +16,7 @@ config = configparser.ConfigParser()
 config.read(TOKEN_PATH)
 
 try:
-    VK_TOKEN = config['VK_API']['VK_TOKEN']
+    VK_TOKEN = config['VK_API']['VK_TOKEN2']
 except Exception:
-    sys.stdin.write('Add VK_TOKEN to VK_API section in setup.cfg')
+    sys.stdout.write('Add VK_TOKEN to VK_API section in setup.cfg')
     VK_TOKEN = None
