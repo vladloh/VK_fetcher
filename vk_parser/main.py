@@ -42,8 +42,8 @@ def show_progress(user_id, remain):
 
 
 def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertices=None):
-    stop_vertices = stop_vertices or {}
     """Bfs through social graph of user."""
+    stop_vertices = stop_vertices or {}
     queue = Queue()
     queue.put(user_id)
     depth = {}
