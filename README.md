@@ -22,3 +22,11 @@ Shortest path have 3 edges:
 `poetry run vk-parser dist 70 6`  
 Shortest path have 2 edges:  
 70 -> 10 -> 6  
+
+
+## VK_TOKEN
+
+``` 
+[VK_API]
+VK_TOKEN = '*********'
+```    
