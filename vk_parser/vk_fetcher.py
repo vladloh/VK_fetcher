@@ -1,10 +1,10 @@
 """Fetch and store some data from vk."""
-import json
 import os
 
 import vk_api
 
-from vk_parser.config import CANT_GET_FRIENDS_ERROR_CODES, DIR_FRIENDS, VK_TOKEN
+from vk_parser.config import CANT_GET_FRIENDS_ERROR_CODES, VK_TOKEN
+from vk_parser.db_worker import add_friendlist, get_user_friends
 
 
 def create_dir_if_not_exists(directory):
@@ -30,10 +30,8 @@ def get_friends_no_cache(user_id):
 
 def load_friends(user_id):
     """Load friend-list from file."""
-    path = '{0}/{1}.json'.format(DIR_FRIENDS, user_id)
     try:
-        with open(path, 'r') as input_file:
-            return json.loads(input_file.read())
+        return get_user_friends(user_id)
     except Exception:
         return None
 
@@ -42,12 +40,8 @@ def cache_friends(user_id, user_friends):
     """Cache friend-list to file."""
     if user_friends is None:
         return False
-
-    path = '{0}/{1}.json'.format(DIR_FRIENDS, user_id)
-    create_dir_if_not_exists(DIR_FRIENDS)
     try:
-        with open(path, 'w') as out_file:
-            out_file.write(json.dumps(user_friends))
+        add_friendlist(user_id, user_friends)
     except Exception:
         return False
 
@@ -62,7 +56,6 @@ def get_friends(user_id, ignore_cache=False):
         return user_friends if user_friends else []
 
     cached_friends = load_friends(user_id)
-
     if cached_friends is None:
         user_friends = get_friends_no_cache(user_id)
         cache_friends(user_id, user_friends)

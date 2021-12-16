@@ -3,6 +3,7 @@ import argparse
 import sys
 from queue import Queue
 
+from vk_parser.db_worker import create_db_if_not_exists
 from vk_parser.vk_fetcher import get_friends
 
 
@@ -121,6 +122,8 @@ def calculate_dist(args):
 
 def main():
     """Point of entry, prints some data about social graph."""
+    create_db_if_not_exists()
+
     parser = initialize_parser()
     args = parser.parse_args()
 
