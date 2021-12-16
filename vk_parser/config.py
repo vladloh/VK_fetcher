@@ -1,5 +1,6 @@
 """Important constants."""
 import configparser
+import sys
 import types
 
 DATABASE_PATH = 'friendlists.db'
@@ -17,5 +18,5 @@ config.read(TOKEN_PATH)
 try:
     VK_TOKEN = config['VK_API']['VK_TOKEN']
 except Exception:
-    print('No VK_TOKEN found. Please add VK_TOKEN to VK_API section in setup.cfg')
+    sys.stdin.write('Add VK_TOKEN to VK_API section in setup.cfg')
     VK_TOKEN = None
