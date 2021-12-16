@@ -29,4 +29,7 @@ Make sure `setup.cfg` exists:
 ``` 
 [VK_API]
 VK_TOKEN = *********
-```    
+```   
+
+Getting token: https://vk.com/dev/access_token?f=3.%20Сервисный%20ключ%20доступа  
+
