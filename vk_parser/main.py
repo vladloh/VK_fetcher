@@ -12,6 +12,7 @@ def initialize_parser():
     parser = argparse.ArgumentParser(
         usage='vk_parser [command] [parameters]',
     )
+    parser.set_defaults(func=lambda args: parser.print_help())
     subparsers = parser.add_subparsers(
         dest='command',
         title='Commands',
@@ -40,7 +41,7 @@ def show_progress(user_id, remain):
     sys.stdout.flush()
 
 
-def bfs_from_user(user_id, max_depth, ignore_cache=False):
+def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertex=None):
     """Bfs through social graph of user."""
     queue = Queue()
     queue.put(user_id)
@@ -53,6 +54,9 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False):
         show_progress(cur_id, queue.qsize())
         if depth[cur_id] == max_depth:
             break
+        if stop_vertex in depth:
+            break
+            
         neighbours = get_friends(cur_id, ignore_cache=ignore_cache)
 
         for new_id in neighbours:
@@ -101,12 +105,14 @@ def calculate_dist(args):
         user_id=args.user_id1,
         max_depth=max_depth1,
         ignore_cache=args.ignore_cache,
+        stop_vertex=args.user_id2,
     )
 
     social_graph2, parent2 = bfs_from_user(
         user_id=args.user_id2,
         max_depth=max_depth2,
         ignore_cache=args.ignore_cache,
+        stop_vertex=args.user_id2,
     )
 
     dist = None
