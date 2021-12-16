@@ -41,7 +41,7 @@ def show_progress(user_id, remain):
     sys.stdout.flush()
 
 
-def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertex=None):
+def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertices={}):
     """Bfs through social graph of user."""
     queue = Queue()
     queue.put(user_id)
@@ -54,8 +54,6 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertex=None):
         show_progress(cur_id, queue.qsize())
         if depth[cur_id] == max_depth:
             break
-        if stop_vertex in depth:
-            break
             
         neighbours = get_friends(cur_id, ignore_cache=ignore_cache)
 
@@ -65,6 +63,9 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertex=None):
                 parents[new_id] = cur_id
                 if depth[new_id] < max_depth:
                     queue.put(new_id)
+                if new_id in stop_vertices:
+                    queue.queue.clear()
+                    break
 
     sys.stdout.write('\nBfs completed!\n')
     return depth, parents
@@ -105,14 +106,14 @@ def calculate_dist(args):
         user_id=args.user_id1,
         max_depth=max_depth1,
         ignore_cache=args.ignore_cache,
-        stop_vertex=args.user_id2,
+        stop_vertices={args.user_id2: 0},
     )
 
     social_graph2, parent2 = bfs_from_user(
         user_id=args.user_id2,
         max_depth=max_depth2,
         ignore_cache=args.ignore_cache,
-        stop_vertex=args.user_id1,
+        stop_vertices=social_graph1,
     )
 
     dist = 10 ** 18
