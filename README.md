@@ -25,7 +25,7 @@ Shortest path have 2 edges:
 
 
 ## VK_TOKEN
-Make sure setup.cfg exists:  
+Make sure `setup.cfg` exists:  
 ``` 
 [VK_API]
 VK_TOKEN = '*********'
