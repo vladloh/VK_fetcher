@@ -115,7 +115,7 @@ def calculate_dist(args):
         stop_vertex=args.user_id1,
     )
 
-    dist = None
+    dist = 10 ** 18
     best_path = None
     for (connector, dist1) in social_graph1.items():
         if connector in social_graph2:

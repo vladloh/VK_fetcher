@@ -10,7 +10,7 @@ def command(func):
         conn = sqlite3.connect(DATABASE_PATH)
         try:
             res = func(conn.cursor(), *args, **kwargs)
-        except Exception:
+        except sqlite3.Error:
             res = None
         finally:
             conn.commit()

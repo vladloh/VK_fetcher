@@ -16,31 +16,24 @@ def get_friends_no_cache(user_id):
             method='friends.get',
             values={'user_id': user_id},
         )
-    except vk_api.ApiError as ex:
+    except vk_api.VkApiError as ex:
         return [] if ex.code in CANT_GET_FRIENDS_ERROR_CODES else None
     except Exception:
-        return None
+       return None
 
     return response['items'] if 'items' in response else None
 
 
 def load_friends(user_id):
     """Load friend-list from file."""
-    try:
-        return get_user_friends(user_id)
-    except Exception:
-        return None
+    return get_user_friends(user_id)
 
 
 def cache_friends(user_id, user_friends):
     """Cache friend-list to file."""
     if user_friends is None:
         return False
-    try:
-        add_friendlist(user_id, user_friends)
-    except Exception:
-        return False
-
+    add_friendlist(user_id, user_friends)
     return True
 
 
