@@ -112,7 +112,7 @@ def calculate_dist(args):
         user_id=args.user_id2,
         max_depth=max_depth2,
         ignore_cache=args.ignore_cache,
-        stop_vertex=args.user_id2,
+        stop_vertex=args.user_id1,
     )
 
     dist = None
