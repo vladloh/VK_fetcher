@@ -1,19 +1,15 @@
 """Fetch and store some data from vk."""
-import os
-
 import vk_api
 
 from vk_parser.config import CANT_GET_FRIENDS_ERROR_CODES, VK_TOKEN
 from vk_parser.db_worker import add_friendlist, get_user_friends
 
 
-def create_dir_if_not_exists(directory):
-    """Create directory if not exists."""
-    os.makedirs(directory, exist_ok=True)
-
-
 def get_friends_no_cache(user_id):
     """Fetch friends with VK API."""
+    if not VK_TOKEN:
+        return None
+
     vk_session = vk_api.VkApi(token=VK_TOKEN)
     try:
         response = vk_session.method(

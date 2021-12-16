@@ -34,6 +34,11 @@ def initialize_parser():
     return parser
 
 
+def show_progress(user_id, remain_users):
+    sys.stdout.write(f'\rParsing user with id = {user_id}, remains {remain_users}. ')
+    sys.stdout.flush()
+
+
 def bfs_from_user(user_id, max_depth, ignore_cache=False):
     """Bfs through social graph of user."""
     queue = Queue()
@@ -44,6 +49,7 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False):
     parents[user_id] = None
     while not queue.empty():
         cur_id = queue.get()
+        show_progress(cur_id, queue.qsize())
         if depth[cur_id] == max_depth:
             break
         neighbours = get_friends(cur_id, ignore_cache=ignore_cache)
@@ -52,8 +58,10 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False):
             if new_id not in depth:
                 depth[new_id] = depth[cur_id] + 1
                 parents[new_id] = cur_id
-                queue.put(new_id)
+                if depth[new_id] < max_depth:
+                    queue.put(new_id)
 
+    sys.stdout.write('\nBfs completed!\n')
     return depth, parents
 
 
