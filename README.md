@@ -28,5 +28,5 @@ Shortest path have 2 edges:
 Make sure `setup.cfg` exists:  
 ``` 
 [VK_API]
-VK_TOKEN = '*********'
+VK_TOKEN = *********
 ```    
