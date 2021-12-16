@@ -49,6 +49,10 @@ def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertices={}):
     depth[user_id] = 0
     parents = {}
     parents[user_id] = None
+
+    if user_id in stop_vertices:
+        return depth, parents
+        
     while not queue.empty():
         cur_id = queue.get()
         show_progress(cur_id, queue.qsize())
