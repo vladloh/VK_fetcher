@@ -17,4 +17,8 @@ Shortest path have 3 edges:
 5 -> 142582 -> 131588 -> 707
 
 `poetry run vk-parser fetch 239932`  
-2010 users by dist <= 2
+2010 users by dist <= 2  
+
+`poetry run vk-parser dist 70 6`
+Shortest path have 2 edges:  
+70 -> 10 -> 6  
