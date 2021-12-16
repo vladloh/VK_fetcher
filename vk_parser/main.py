@@ -41,7 +41,8 @@ def show_progress(user_id, remain):
     sys.stdout.flush()
 
 
-def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertices={}):
+def bfs_from_user(user_id, max_depth, ignore_cache=False, stop_vertices=None):
+    stop_vertices = stop_vertices or {}
     """Bfs through social graph of user."""
     queue = Queue()
     queue.put(user_id)
@@ -125,7 +126,7 @@ def calculate_dist(args):
     for (connector, dist1) in social_graph1.items():
         if connector in social_graph2:
             new_dist = dist1 + social_graph2.get(connector)
-            if dist is None or new_dist < dist:
+            if new_dist < dist:
                 dist = new_dist
                 path1 = get_path(connector, parent1)
                 path2 = get_path(connector, parent2)
